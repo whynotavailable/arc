@@ -12,6 +12,8 @@ func main() {
 		port = "8080"
 	}
 
+	http.HandleFunc("/token", tokenHandler)
+
 	err := http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
 
 	println(err)
