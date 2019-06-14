@@ -7,6 +7,13 @@ import (
 )
 
 func tokenHandler(rw http.ResponseWriter, r *http.Request) {
+	defer func () {
+		err := recover()
+		if err != "" {
+			http.Error(rw, "Bad Times Lol", http.StatusInternalServerError)
+		}
+	}()
+
 	if r.Method != "POST" {
 		badRequest(rw, "Only Post Allowed")
 		return
